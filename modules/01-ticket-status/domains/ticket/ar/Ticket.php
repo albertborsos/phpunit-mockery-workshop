@@ -14,7 +14,7 @@ use Yii;
  * @property int $assignee_id
  * @property int $status
  */
-class Ticket extends \yii\db\ActiveRecord
+abstract class Ticket extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}

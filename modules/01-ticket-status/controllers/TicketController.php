@@ -2,9 +2,14 @@
 
 namespace tickets\controllers;
 
+use tickets\services\ticket\CreateTicketService;
+use tickets\services\ticket\forms\CreateTicketForm;
+use tickets\services\ticket\forms\UpdateTicketForm;
+use tickets\services\ticket\UpdateTicketService;
 use Yii;
 use tickets\domains\ticket\Ticket;
 use tickets\domains\ticket\search\TicketSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,8 +25,17 @@ class TicketController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
@@ -64,14 +78,17 @@ class TicketController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Ticket();
+        $form = new CreateTicketForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $service = new CreateTicketService($form);
+            if ($ticketId = $service->execute()) {
+                return $this->redirect(['view', 'id' => $ticketId]);
+            }
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 
@@ -86,12 +103,17 @@ class TicketController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $form = new UpdateTicketForm($model);
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $service = new UpdateTicketService($form, $model);
+            if ($ticketId = $service->execute()) {
+                return $this->redirect(['view', 'id' => $ticketId]);
+            }
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $form,
         ]);
     }
 

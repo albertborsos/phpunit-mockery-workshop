@@ -7,12 +7,23 @@ use app\modules\base\components\validators\HtmlPurifierFilter;
 use tickets\domains\ticket\Ticket;
 use yii\base\Model;
 
-class CreateTicketForm extends Model
+class UpdateTicketForm extends Model
 {
+    public $id;
     public $name;
     public $description;
     public $assignee_id;
     public $status;
+
+    public function __construct(Ticket $model, array $config = [])
+    {
+        $this->id = $model->id;
+        $this->name = $model->name;
+        $this->description = $model->description;
+        $this->assignee_id = $model->assignee_id;
+        $this->status = $model->status;
+        parent::__construct($config);
+    }
 
     public function rules()
     {
@@ -24,7 +35,7 @@ class CreateTicketForm extends Model
 
             [['assignee_id'], 'in', 'range' => array_keys(User::users())],
 
-            [['status'], 'in', 'range' => array_keys(Ticket::allowedStatuses($this->status))], // @todo exercise: update validator
+            [['status'], 'in', 'range' => array_keys(Ticket::allowedStatuses($this->status))],
         ];
     }
 }

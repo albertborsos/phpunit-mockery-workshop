@@ -16,11 +16,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'owner_id')->textInput() ?>
+    <?= $form->field($model, 'assignee_id')->dropDownList(\app\models\User::users(), ['prompt' => 'Choose...']) ?>
 
-    <?= $form->field($model, 'assignee_id')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(\tickets\domains\ticket\Ticket::allowedStatuses($model->status)) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

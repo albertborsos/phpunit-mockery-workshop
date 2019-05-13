@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use yii\helpers\ArrayHelper;
+
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
@@ -65,6 +67,14 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public static function users()
+    {
+        return ArrayHelper::map(self::$users, 'id', 'username');
     }
 
     /**
