@@ -50,3 +50,20 @@ composer install
         - valid test cases
         - invalid test cases
     - get ticket from database fixtures and test to update every allowed attributes: `tests/unit/modules/tickets/services/ticket/UpdateTicketServiceTest.php` 
+
+## 2. Exercise - Offer Discount With Dynamic Deadline
+
+ - You send an offer to a customer. This offer contains a discount with a dynamic deadline, which calculates from the time, when the customer saw the offer first.
+ The period of the discount can be between 1 and 8 workdays. The opening hours are the following:
+
+  | Day | Close At |
+  | -------------: | :-------------- |
+  |Monday| 17:00|
+  |Tuesday| 17:00|
+  |Wednesday| 17:00|
+  |Thursday| 17:00|
+  |Friday| 17:00|
+  |Saturday| 14:00|
+  |Sunday| - |
+
+  - write tests to check the calculation of the discount's deadline: `tests/unit/modules/store/domains/offer/OfferTest.php`

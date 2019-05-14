@@ -2,7 +2,7 @@
 
 return [
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'base', 'tickets'],
+    'bootstrap' => ['log', 'base', 'tickets', 'store'],
     'language' => 'en',
     'sourceLanguage' => 'en',
     'aliases' => [
@@ -60,10 +60,18 @@ return [
                 ],
             ],
         ],
+        'formatter' => [
+            'class' => \yii\i18n\Formatter::class,
+            'datetimeFormat' => 'php:Y-m-d H:i',
+            'currencyCode' => 'USD',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+        ],
     ],
     'modules' => [
         'base' => \app\modules\base\Module::class,
         'tickets' => \tickets\Module::class,
+        'store' => \store\Module::class,
     ],
     'params' => [
         'adminEmail' => 'admin@example.com',
