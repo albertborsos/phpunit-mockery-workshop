@@ -22,5 +22,27 @@ class CreateTicketFormTest extends TestCase
     }
 
     // @todo exercise: add valid test cases
+
+    /**
+     * Need to test:
+     *  - form validation returns `true`
+     *  - errors attribute of the form is empty
+     */
+    public function testShouldPassValidation()
+    {
+
+    }
+
     // @todo exercise: add invalid test cases
+
+    /**
+     * Need to test
+     *  - form validation returns `false`
+     *  - form has an error message for the expected attribute
+     *  - form has only 1 error
+     */
+    public function testShouldNotPassValidation()
+    {
+
+    }
 }

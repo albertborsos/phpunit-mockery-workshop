@@ -7,6 +7,9 @@ $common = require __DIR__ . '/web.php';
 return \yii\helpers\ArrayHelper::merge($common, [
     'id' => 'basic-tests',
     'basePath' => dirname(__DIR__),
+    'aliases' => [
+        '@tests' => '@app/tests',
+    ],
     'components' => [
         'db' => [
             'dsn' => getenv('DB_TEST_DSN'),

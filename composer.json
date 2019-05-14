@@ -39,6 +39,7 @@
     "autoload": {
         "psr-4": {
             "app\\": "/",
+            "tests\\": "tests",
             "tickets\\": "modules/01-ticket-status/"
         }
     },

@@ -32,6 +32,7 @@ composer install
     - add test cases in: `tests/unit/modules/tickets/services/ticket/forms/CreateTicketFormTest.php`
         - valid test cases
         - invalid test cases
+    - update test to use a data provider: `tests/unit/modules/tickets/services/ticket/CreateTicketServiceTest.php`
 
  - On Ticket update: allow only the following ticket statuses based on the current status.
  
@@ -48,4 +49,4 @@ composer install
     - add test cases in: `tests/unit/modules/tickets/services/ticket/forms/UpdateTicketFormTest.php`
         - valid test cases
         - invalid test cases
-        - simplify valid-invalid test cases by merging data providers into one
+    - get ticket from database fixtures and test to update every allowed attributes: `tests/unit/modules/tickets/services/ticket/UpdateTicketServiceTest.php` 
