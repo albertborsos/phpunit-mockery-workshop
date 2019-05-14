@@ -11,7 +11,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         parent::init();
         if (\Yii::$app instanceof \yii\console\Application) {
-            $this->controllerNamespace = 'app\modules\conduit\commands';
+            $this->controllerNamespace = 'app\modules\base\commands';
         }
     }
 

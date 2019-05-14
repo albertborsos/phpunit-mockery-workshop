@@ -29,6 +29,6 @@ class Bootstrap
         if (!isset($app->controllerMap['migrate']['class'])) {
             $app->controllerMap['migrate']['class'] = MigrateController::class;
         }
-        $app->controllerMap['migrate']['migrationPath'][] = '@app/modules/conduit/migrations';
+        $app->controllerMap['migrate']['migrationPath'][] = '@app/modules/base/migrations';
     }
 }
