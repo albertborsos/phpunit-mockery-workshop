@@ -2,6 +2,7 @@
 
 namespace store\domains\offer;
 
+use billing\domains\invoice\Invoice;
 use Carbon\Carbon;
 use store\Module;
 
@@ -60,5 +61,19 @@ class Offer extends \store\domains\offer\ar\Offer
         }
 
         return Carbon::parse($this->customer_viewed_at)->addDays($numberOfDiscountWorkdays)->setTimeFromTimeString(Module::CLOSE_AT_BY_DAY_NUM[$endDayNum])->format('Y-m-d H:i');
+    }
+
+    public function getMaxBillableAmount()
+    {
+        if (empty($this->invoices)) {
+            return $this->price;
+        }
+
+        return $this->price - $this->getInvoices()->sum('amount');
+    }
+
+    public function hasDepositInvoice()
+    {
+        return $this->getInvoices()->where(['type' => Invoice::TYPE_DEPOSIT])->exists();
     }
 }

@@ -33,9 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'discount_workdays_period',
             'customer_viewed_at:datetime',
             'discountDeadline',
-            'status',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {invoice} {delete}',
+                'buttons' => [
+                    'invoice' => function ($url, $model, $key) {
+                        return $model->status === \store\domains\offer\Offer::STATUS_ORDERED
+                            ? Html::a(Html::tag('span', '', ['class' => 'glyphicon glyphicon-file']), ['/billing/invoice/create', 'offer' => $key])
+                            : null;
+                    },
+                ],
+            ],
         ],
     ]); ?>
 

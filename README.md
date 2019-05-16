@@ -67,3 +67,25 @@ composer install
   |Sunday| - |
 
   - write tests to check the calculation of the discount's deadline: `tests/unit/modules/store/domains/offer/OfferTest.php`
+
+## 3. Exercise - Create Invoice for Offers
+
+Write the tests in `tests/unit/modules/billing/services/invoice/forms/CreateInvoiceFormTest.php`, based on the following rules:
+
+| Invoice Type | Rule |
+| -------------| ---- |
+|Deposit| can create multiple deposit invoices for an offer |
+|Deposit| amount with zero value is not valid |
+|Deposit| amount cannot be larger than the price of the offer |
+|Deposit| sum of deposit invoices can not be larger than the price of the offer |
+|Deposit| cannot create deposit invoice if final invoice already exists |
+|Final| offer must have at least one deposit invoice to create a final invoice  |
+|Final| amount of the invoice cannot be larger then the price of the offer minus the sum of the deposit invoices |
+|Final| amount with zero value is valid |
+|Final| only 1 final invoice is allowed |
+|Full| cannot create full invoice if the sum of the deposit invoices and the final invoice are reached the price of the offer |
+|Full| cannot create full invoice if deposit invoice exists, but final invoice is not exist |
+|Full| amount must be equals with the price of the offer OR the price of the offer minus the sum of the deposit and final invoices |
+
+Write tests in `tests/unit/modules/billing/services/invoice/CreateInvoiceServiceTest.php` to check the following things:
+ - created invoice got a serial number (mock the "api")

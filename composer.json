@@ -43,7 +43,8 @@
             "app\\": "/",
             "tests\\": "tests",
             "tickets\\": "modules/01-ticket-status/",
-            "store\\": "modules/02-store/"
+            "store\\": "modules/02-store/",
+            "billing\\": "modules/03-billing/"
         }
     },
     "scripts": {

@@ -2,7 +2,7 @@
 
 return [
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'base', 'tickets', 'store'],
+    'bootstrap' => ['log', 'base', 'tickets', 'store', 'billing'],
     'language' => 'en',
     'sourceLanguage' => 'en',
     'aliases' => [
@@ -67,11 +67,13 @@ return [
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
         ],
+        'billingApi' => \billing\components\BillingProvider::class,
     ],
     'modules' => [
         'base' => \app\modules\base\Module::class,
         'tickets' => \tickets\Module::class,
         'store' => \store\Module::class,
+        'billing' => \billing\Module::class,
     ],
     'params' => [
         'adminEmail' => 'admin@example.com',

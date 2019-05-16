@@ -2,6 +2,7 @@
 
 namespace store\domains\offer\ar;
 
+use billing\domains\invoice\Invoice;
 use Yii;
 
 /**
@@ -14,6 +15,8 @@ use Yii;
  * @property int $discount_workdays_period
  * @property int $customer_viewed_at
  * @property int $status
+ *
+ * @property Invoice[] $invoices
  */
 abstract class Offer extends \yii\db\ActiveRecord
 {
@@ -50,6 +53,14 @@ abstract class Offer extends \yii\db\ActiveRecord
             'customer_viewed_at' => 'Customer Viewed At',
             'status' => 'Status',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInvoices()
+    {
+        return $this->hasMany(Invoice::class, ['offer_id' => 'id']);
     }
 
     /**
